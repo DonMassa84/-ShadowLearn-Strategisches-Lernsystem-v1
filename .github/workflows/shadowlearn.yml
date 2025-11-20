@@ -1,0 +1,28 @@
+name: ShadowLearn CI
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install backend deps
+        run: |
+          cd app_backend
+          pip install -r requirements.txt
+
+      - name: Test Backend
+        run: |
+          python - << 'PY'
+import requests
+print("Backend Test Ready")
+PY

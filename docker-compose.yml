@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./app_backend
+    ports:
+      - "8000:8000"
+
+  frontend:
+    image: cirrusci/flutter:latest
+    working_dir: /app
+    volumes:
+      - ./app_frontend:/app
+    command: bash -c "flutter pub get && flutter build web"
